@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import ScrollToBottom from "react-scroll-to-bottom";
 import "./App.css";
 import { IoMdSend } from "react-icons/io";
+import { AiFillMessage } from "react-icons/ai";
 
 function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const [messages, setMessages] = useState(false);
+
   const sendMessage = async () => {
     if (currentMessage !== "") {
       setMessages(true);
@@ -14,10 +16,10 @@ function Chat({ socket, username, room }) {
         room: room,
         author: username,
         message: currentMessage,
-        time:
-          new Date(Date.now()).getHours() +
-          ":" +
-          new Date(Date.now()).getMinutes(),
+        time: new Date(Date.now()).toLocaleTimeString("tr-TR", {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
       };
       await socket.emit("send_message", messageData);
       setMessageList((list) => [...list, messageData]);
@@ -36,9 +38,15 @@ function Chat({ socket, username, room }) {
       </p>
       <div className="chat-header">
         {messages ? (
-          <p>Total messages: ({messageList.length})</p>
+          <p>
+            <AiFillMessage className="icon" size={25} /> Total messages: (
+            {messageList.length})
+          </p>
         ) : (
-          <p>There is no message yet!</p>
+          <p>
+            <AiFillMessage className="icon" size={25} /> There is no message
+            yet!
+          </p>
         )}
       </div>
       <div className="chat-body">
