@@ -113,7 +113,7 @@ body {
 }
 
 #you .message-content {
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 #you .message-meta {
@@ -126,7 +126,7 @@ body {
 }
 
 #other .message-content {
-  justify-content: flex-end;
+  justify-content: center;
   background-color: cornflowerblue;
 }
 
