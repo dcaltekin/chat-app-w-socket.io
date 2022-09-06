@@ -31,7 +31,9 @@ function Chat({ socket, username, room }) {
   }, [socket]);
   return (
     <div className="chat-window">
-      {console.log(messageList.length)}{" "}
+      <p>
+        Room ID: {room} as {username}
+      </p>
       <div className="chat-header">
         {messages ? (
           <p>Total messages: ({messageList.length})</p>
