@@ -19,18 +19,18 @@ function App() {
   return (
     <div className="App">
       {!showChat ? (
-        <div>
-          <h3>Join A Chat</h3>
+        <div className="joinChatContainer">
+          <h3>Chat App</h3>
           <input
             type="text"
-            placeholder="Doğukan..."
+            placeholder="Your name"
             onChange={(event) => {
               setUsername(event.target.value);
             }}
           />
           <input
             type="text"
-            placeholder="Room ID..."
+            placeholder="Room id"
             onChange={(event) => {
               setRoom(event.target.value);
             }}
