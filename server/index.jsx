@@ -17,11 +17,12 @@ io.on("connection", (socket) => {
   console.log(`User id: ${socket.id}`);
 
   socket.on("join_room", (data) => {
-    socket.join(data);
+    socket.join(data.room);
     var onlineUsers = io.engine.clientsCount;
     console.log(onlineUsers);
 
-    io.emit("roomData", onlineUsers);
+    io.to(data.room).emit("roomData", onlineUsers);
+    io.to(data.room).emit("userjoin", data.username);
 
     console.log(`${socket.id} joined the room: ${data}`);
   });

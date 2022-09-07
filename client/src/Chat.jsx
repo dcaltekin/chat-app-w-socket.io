@@ -9,6 +9,7 @@ function Chat({ socket, username, room }) {
   const [messageList, setMessageList] = useState([]);
   const [messages, setMessages] = useState(false);
   const [count, setCount] = useState(0);
+  const [join, setJoin] = useState([]);
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
@@ -41,6 +42,12 @@ function Chat({ socket, username, room }) {
   }, [socket]);
 
   useEffect(() => {
+    socket.on("userjoin", (data) => {
+      setJoin(data);
+    });
+  }, [socket]);
+
+  useEffect(() => {
     socket.on("roomLeave", (count) => {
       setCount(count);
     });
@@ -49,7 +56,7 @@ function Chat({ socket, username, room }) {
     <div className="chat-window">
       Online users: {count}
       <p>
-        Room ID: {room} as {username}
+        Room ID: {room} <br /> Your Name: {username}
       </p>
       <div className="chat-header">
         {messages ? (
@@ -65,7 +72,9 @@ function Chat({ socket, username, room }) {
         )}
       </div>
       <div className="chat-body">
+        {/*  */}
         <ScrollToBottom className="message-container">
+          <div className="joinedChat">{join + " joined the chat"}</div>
           {messageList.map((messageContent) => {
             return (
               <div

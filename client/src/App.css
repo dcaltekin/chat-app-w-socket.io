@@ -13,6 +13,11 @@ body {
 }
 @import url("https://fonts.googleapis.com/css2?family=Arimo&family=DynaPuff&family=Gantari:wght@300&family=Montserrat:wght@500&family=Prompt&display=swap");
 
+.joinedChat {
+  text-align: center;
+  margin-top: 10px;
+}
+
 .joinChatContainer {
   display: flex;
   flex-direction: column;
@@ -71,7 +76,7 @@ body {
 }
 
 .chat-window .chat-body {
-  height: calc(450px - (45px + 70px));
+  height: calc(650px - (45px + 70px));
   border: 1px solid #263238;
   background: #fff;
   width: 500px;
