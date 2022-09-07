@@ -18,10 +18,10 @@ io.on("connection", (socket) => {
 
   socket.on("join_room", (data) => {
     socket.join(data);
-    var x = io.engine.clientsCount;
-    console.log(x);
+    var onlineUsers = io.engine.clientsCount;
+    console.log(onlineUsers);
 
-    io.emit("roomData", x);
+    io.emit("roomData", onlineUsers);
 
     console.log(`${socket.id} joined the room: ${data}`);
   });
@@ -31,6 +31,10 @@ io.on("connection", (socket) => {
   });
   socket.on("disconnect", () => {
     console.log("User disconnected", socket.id);
+    var onlineUsers = io.engine.clientsCount;
+    console.log(onlineUsers);
+
+    io.emit("roomLeave", onlineUsers);
   });
 });
 

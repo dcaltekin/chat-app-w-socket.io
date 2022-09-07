@@ -38,7 +38,13 @@ function Chat({ socket, username, room }) {
     socket.on("roomData", (count) => {
       setCount(count);
     });
-  }, []);
+  }, [socket]);
+
+  useEffect(() => {
+    socket.on("roomLeave", (count) => {
+      setCount(count);
+    });
+  }, [socket]);
   return (
     <div className="chat-window">
       Online users: {count}
