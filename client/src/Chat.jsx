@@ -8,6 +8,7 @@ function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const [messages, setMessages] = useState(false);
+  const [count, setCount] = useState(0);
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
@@ -21,6 +22,7 @@ function Chat({ socket, username, room }) {
           minute: "2-digit",
         }),
       };
+
       await socket.emit("send_message", messageData);
       setMessageList((list) => [...list, messageData]);
       setCurrentMessage("");
@@ -31,8 +33,15 @@ function Chat({ socket, username, room }) {
       setMessageList((list) => [...list, data]);
     });
   }, [socket]);
+
+  useEffect(() => {
+    socket.on("roomData", (count) => {
+      setCount(count);
+    });
+  }, []);
   return (
     <div className="chat-window">
+      Online users: {count}
       <p>
         Room ID: {room} as {username}
       </p>
